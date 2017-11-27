@@ -78,7 +78,7 @@ util.inherits(Sentry, TransportStream);
 
 // Define a getter so that `winston.transports.Sentry`
 // is available and thus backwards compatible
-// winston.transports.Sentry = Sentry;
+winston.transports.Sentry = Sentry;
 
 //
 // Expose the name of this Transport on the prototype
