@@ -3,6 +3,7 @@ const _ = require('lodash');
 const Raven = require('raven');
 const winston = require('winston');
 const util = require('util');
+const TransportStream = require('winston-transport');
 
 function errorHandler(err) {
   console.error(err.message);
@@ -32,7 +33,7 @@ function Sentry(options) {
     }
   });
 
-  winston.Transport.call(this, _.omit(options, [
+  TransportStream.call(this, _.omit(options, [
     'levelsMap',
     'install',
     'dsn',
@@ -73,14 +74,19 @@ function Sentry(options) {
 };
 
 // Inherit from `winston.Transport`
-util.inherits(Sentry, winston.Transport);
+util.inherits(Sentry, TransportStream);
 
 // Define a getter so that `winston.transports.Sentry`
 // is available and thus backwards compatible
-winston.transports.Sentry = Sentry;
+// winston.transports.Sentry = Sentry;
 
-Sentry.prototype.log = function(level, msg, meta, fn) {
+//
+// Expose the name of this Transport on the prototype
+//
+Sentry.prototype.name = 'sentry'
 
+Sentry.prototype.log = function(info, fn) {
+  let { level, msg, meta } = info;
   if (this.silent) return fn(null, true);
   if (!(level in this._levelsMap)) return fn(null, true);
 
