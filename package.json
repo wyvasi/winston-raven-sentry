@@ -7,12 +7,10 @@
     "url": "https://github.com/niftylettuce/winston-raven-sentry/issues"
   },
   "dependencies": {
-    "lodash": "^4.17.4",
-    "raven": "^2.4.0",
-    "winston-transport": "^3.0.1"
-  },
-  "devDependencies": {
-    "winston": "^2.3.1"
+    "lodash": "^4.17.5",
+    "raven": "^2.4.2",
+    "winston-transport": "^3.0.1",
+    "winston": "^3.0.0-rc1"
   },
   "engines": {
     "node": ">= 4.8.4"
@@ -33,7 +31,7 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "winston": ">= 2.x"
+    "winston": ">= 3.0.0-rc1"
   },
   "repository": {
     "type": "git",
